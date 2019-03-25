@@ -6,8 +6,6 @@
 #
 # Criado por: Waltenne Carvalho
 # 
-#
-# Variáveis Globais
 			
 ERRO=/tmp/errorinstallZabbix.log
 
@@ -176,14 +174,16 @@ Timeout=3
 EnableRemoteCommands=1
 EOF
 
+sleep 1
+
 echo "-------------------------------------------------------
                     !!!Instalacao Concluida!!!            
       -------------------------------------------------------"
-
+sleep 1
 echo "-------------------------------------------------------
             !!!Acesse do seu navegador IP/zabbix !!!    
       -------------------------------------------------------"
-
+sleep 1
 exit 0	
 
 
