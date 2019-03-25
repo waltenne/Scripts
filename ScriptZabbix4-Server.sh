@@ -157,8 +157,6 @@ EOF
 sleep 1
 
 	# Criando arquivo de configuração zabbix_agentd.conf
-	echo "$BANNER_PRINCIPAL"
-	echo "$banner_instalacaoCliente"
 	echo -n "Digite o IP do servidor Zabbix:"
 	read ipservidor
 	echo -n "Digite o Hostname para essa maquina:"
