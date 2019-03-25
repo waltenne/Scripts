@@ -2,7 +2,7 @@
 # 
 # Versão=1.0
 # 
-# Script de instalação do zabbix Server
+# Script para automatização da instação do Zabbix-Server
 #
 # Criado por: Waltenne Carvalho
 # 
