@@ -75,6 +75,7 @@ systemctl start httpd
 systemctl enable zabbix-agent
 systemctl enable mariadb
 systemctl start mariadb
+systemctl enable zabbix_sever
 
 	echo "
     -------------------------------------------------------
@@ -173,6 +174,11 @@ LogFile=/var/log/zabbix/zabbix_agentd.log
 Timeout=3
 EnableRemoteCommands=1
 EOF
+
+echo "date.timezone America/Sao_Paulo"  >> /etc/php.ini
+
+systemctl restart httpd
+systemctl start zabbix_sever
 
 sleep 1
 
