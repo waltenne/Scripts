@@ -9,9 +9,9 @@ from zabbix_api import ZabbixAPI
 from requests import get
 
 # Zabbix Server Connection Data
-url = 'http://zabbix.oobj-dfe.com.br/zabbix/api_jsonrpc.php'
-user = 'waltenne'
-password = 'wc4rv4lho'
+url = 'http://localhost/zabbix/api_jsonrpc.php'
+user = 'Admin'
+password = 'zabbix'
 try:
 	zapi = ZabbixAPI(url, timeout=180)
 	zapi.login(user, password)
@@ -20,7 +20,7 @@ except Exception as err:
 	print('Error: {}'.format(err))
 
 # Searching for the Hostname defined within the zabbix_agentd.conf
-file = open("D:\Script\python\zabbix_agentd.conf").readlines()
+file = open("\etc\zabbix\zabbix_agentd.conf").readlines()
 for lines in file:
 	if 'Hostname=' in lines:
 		host_name1 = lines.split(":")[-1].strip()
