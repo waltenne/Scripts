@@ -1,0 +1,51 @@
+#	Autor: Waltenne Carvalho
+#	Github: https://github.com/waltenne
+
+#!/usr/bin/env python
+
+# -*- coding: utf-8 -*-
+import re
+from zabbix_api import ZabbixAPI
+from requests import get
+
+# Zabbix Server Connection Data
+url = 'http://zabbix.oobj-dfe.com.br/zabbix/api_jsonrpc.php'
+user = 'waltenne'
+password = 'wc4rv4lho'
+try:
+	zapi = ZabbixAPI(url, timeout=180)
+	zapi.login(user, password)
+except Exception as err:
+	print('Failed to connect to Zabbix API')
+	print('Error: {}'.format(err))
+
+# Searching for the Hostname defined within the zabbix_agentd.conf
+file = open("D:\Script\python\zabbix_agentd.conf").readlines()
+for lines in file:
+	if 'Hostname=' in lines:
+		host_name1 = lines.split(":")[-1].strip()
+host_name2 = re.findall(r"=(.*)",(host_name1))
+hostname_final = (host_name2[0])
+
+# With Hostname Found, I connect to the Zabbix API to collect Hostid.
+reqhostget = zapi.host.get({"output":['hostid','host'],"filter":{"host": hostname_final}})
+host_id = (reqhostget[0]['hostid'])
+
+# With Hostid Found, I connect to the Zabbix API to collect IP Address from the host
+reqinterfaceget = zapi.hostinterface.get({"output":['hostid','ip'],"filter":{"hostid": host_id}})
+ipaddress = (reqinterfaceget[0]['ip'])
+
+# Now I collect or public ip from the local machine
+public = get('https://api.ipify.org').text
+
+# With Hostid Found, I connect to the Zabbix API to collect interfaceid from host
+reqinterfaceid = zapi.hostinterface.get({"output":['interfaceid'],"filter":{"hostid": host_id}})
+interfaceid = (reqinterfaceid[0]['interfaceid'])
+
+# Now I Compare Current Host IP Address on Zabbix Server to Current Public IP Address
+# If this is different, I update the host's IP address with Zabbix with the public IP address
+if ipaddress != public:
+	reqinterfaceidupd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
+	print(reqinterfaceidupd)
+
+# The End
