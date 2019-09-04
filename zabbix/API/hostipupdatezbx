@@ -1,26 +1,25 @@
+#!/usr/bin/python3
 #	Autor: Waltenne Carvalho
 #	Github: https://github.com/waltenne
-
-#!/usr/bin/env python
-
 # -*- coding: utf-8 -*-
 import re
-from zabbix_api import ZabbixAPI
+from pyzabbix import ZabbixAPI
 from requests import get
 
 # Zabbix Server Connection Data
-url = 'http://localhost/zabbix/api_jsonrpc.php'
-user = 'Admin'
-password = 'zabbix'
+url      = 'http://INSERTIPZABBIXSERVER/zabbix/api_jsonrpc.php'
+username = 'INSERTUSER'
+password = 'INSERTPASSWORD'
+
 try:
 	zapi = ZabbixAPI(url, timeout=180)
-	zapi.login(user, password)
+	zapi.login(username, password)
 except Exception as err:
 	print('Failed to connect to Zabbix API')
 	print('Error: {}'.format(err))
 
 # Searching for the Hostname defined within the zabbix_agentd.conf
-file = open("\etc\zabbix\zabbix_agentd.conf").readlines()
+file = open("/etc/zabbix/zabbix_agentd.conf").readlines()
 for lines in file:
 	if 'Hostname=' in lines:
 		host_name1 = lines.split(":")[-1].strip()
@@ -42,10 +41,18 @@ public = get('https://api.ipify.org').text
 reqinterfaceid = zapi.hostinterface.get({"output":['interfaceid'],"filter":{"hostid": host_id}})
 interfaceid = (reqinterfaceid[0]['interfaceid'])
 
+print("This IP Public " + public + " This IP into Zabbix Server " + ipaddress)
+print("This Hostname " + hostname_final + " This HostID " + host_id)
+print("This InterfaceID " + interfaceid)
 # Now I Compare Current Host IP Address on Zabbix Server to Current Public IP Address
 # If this is different, I update the host's IP address with Zabbix with the public IP address
 if ipaddress != public:
 	reqinterfaceidupd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
-	print(reqinterfaceidupd)
+	print("IP address old " + ipaddress)
+	print("IP address new " + public)
+	print("IP address are not the same, Updated IP Address")
+
+else:
+	print("IP Address equal")
 
 # The End
