@@ -7,3 +7,5 @@ Script Sharing Repository
 ## 2. API directory
 ## 2.1 hostipupdatezbx
   - Script that updates a host's IP address on Zabbix Server when it has dynamic ip address
+  - Python packages required pyzabbix ( Requests / pyzabbix )
+  - Edit the file and change the username and password information for connecting to Zabbix Server
