@@ -1,16 +1,20 @@
 # Scripts
 
   - Script Sharing Repository
+  
+## 1. Zabbix directory
 
-## 1. Autoinstall directory
+  - Zabbix Script Sharing Repository
+  
+## 2. Autoinstall directory
 
   - Script to automate Server and Agent installation on CentOS Zabbix 4.0
 
-## 2. API directory
+## 3. API directory
 
   - Directory containing Scripts Created to Connect to the zabbix API
   
-## 2.1 hostipupdatezbx
+## 4.1 hostipupdatezbx
 
   - Script that updates a host's IP address on Zabbix Server when it has dynamic ip address
   - Python packages required pyzabbix ( Requests / pyzabbix )
