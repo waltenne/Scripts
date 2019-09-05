@@ -25,7 +25,7 @@ for lines in file:
 		host_name1 = lines.split(":")[-1].strip()
 host_name2 = re.findall(r"=(.*)",(host_name1))
 host_name = (host_name2[0])
-
+type(host_name)
 # With Hostname Found, I connect to the Zabbix API to collect Hostid.
 req_host_get = zapi.host.get(filter={"host": host_name})
 host_id = (req_host_get[0]['hostid'])
@@ -43,8 +43,8 @@ interfaceid = (req_interface_id[0]['interfaceid'])
 
 # Now I Compare Current Host IP Address on Zabbix Server to Current Public IP Address
 # If this is different, I update the host's IP address with Zabbix with the public IP address
-if ipaddress != public:
-	req_interfaceid_upd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
+if ip_hostzabbix_srv != ip_public:
+	#req_interfaceid_upd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
 	print("This Hostname " + host_name + " This HostID " + host_id)
 	print("IP address On Zabbix Server " + ip_hostzabbix_srv)
 	print("IP address Public " + ip_public)
