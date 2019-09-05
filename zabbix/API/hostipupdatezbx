@@ -27,30 +27,33 @@ host_name2 = re.findall(r"=(.*)",(host_name1))
 hostname_last = (host_name2[0])
 
 # With Hostname Found, I connect to the Zabbix API to collect Hostid.
-reqhostget = zapi.host.get({"output":['hostid','host'],"filter":{"host": hostname_last}})
+reqhostget = zapi.host.get(filter={"host": hostname_last})
 host_id = (reqhostget[0]['hostid'])
 
 # With Hostid Found, I connect to the Zabbix API to collect IP Address from the host
-reqinterfaceget = zapi.hostinterface.get({"output":['hostid','ip'],"filter":{"hostid": host_id}})
+reqinterfaceget = zapi.hostinterface.get(filter={"hostid": host_id})
 ipaddress = (reqinterfaceget[0]['ip'])
 
 # Now I collect or public ip from the local machine
 public = get('https://api.ipify.org').text
 
 # With Hostid Found, I connect to the Zabbix API to collect interfaceid from host
-reqinterfaceid = zapi.hostinterface.get({"output":['interfaceid'],"filter":{"hostid": host_id}})
+reqinterfaceid = zapi.hostinterface.get(filter={"hostid": host_id})
 interfaceid = (reqinterfaceid[0]['interfaceid'])
 
 # Now I Compare Current Host IP Address on Zabbix Server to Current Public IP Address
 # If this is different, I update the host's IP address with Zabbix with the public IP address
 if ipaddress != public:
-	reqinterfaceidupd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
+	#reqinterfaceidupd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
 	print("This Hostname " + hostname_last + " This HostID " + host_id)
 	print("IP address old " + ipaddress)
-	print("IP address new " + public)	
+	print("IP address new " + public)
 	print("IP address are not the same, Updated IP Address")
 
 else:
 	print("IP Address equal")
+	print("This Hostname " + hostname_last + " This HostID " + host_id)
+	print("IP address old " + ipaddress)
+	print("IP address new " + public)
 
 # The End
