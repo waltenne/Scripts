@@ -46,14 +46,14 @@ interfaceid = (reqinterfaceid[0]['interfaceid'])
 if ipaddress != public:
 	#reqinterfaceidupd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
 	print("This Hostname " + hostname_last + " This HostID " + host_id)
-	print("IP address old " + ipaddress)
-	print("IP address new " + public)
+	print("IP address On Zabbix Server " + ipaddress)
+	print("IP address Public " + public)
 	print("IP address are not the same, Updated IP Address")
 
 else:
 	print("IP Address equal")
 	print("This Hostname " + hostname_last + " This HostID " + host_id)
-	print("IP address old " + ipaddress)
-	print("IP address new " + public)
+	print("IP address On Zabbix Server " + ipaddress)
+	print("IP address Public " + public)
 
 # The End
