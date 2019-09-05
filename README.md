@@ -14,7 +14,7 @@
 
   - Directory containing Scripts Created to Connect to the zabbix API
   
-## 4.1 hostipupdatezbx
+### 3.1 hostipupdatezbx
 
   - Script that updates a host's IP address on Zabbix Server when it has dynamic ip address
   - Python packages required pyzabbix ( Requests / pyzabbix )
