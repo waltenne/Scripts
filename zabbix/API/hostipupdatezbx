@@ -44,7 +44,7 @@ interfaceid = (req_interface_id[0]['interfaceid'])
 # Now I Compare Current Host IP Address on Zabbix Server to Current Public IP Address
 # If this is different, I update the host's IP address with Zabbix with the public IP address
 if ipaddress != public:
-	#reqinterfaceidupd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
+	req_interfaceid_upd = zapi.hostinterface.update({"interfaceid": interfaceid,"ip": public})
 	print("This Hostname " + host_name + " This HostID " + host_id)
 	print("IP address On Zabbix Server " + ip_hostzabbix_srv)
 	print("IP address Public " + ip_public)
