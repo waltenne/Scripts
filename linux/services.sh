@@ -15,7 +15,7 @@ falied1="failed(Result:"
 activating="activating (start)"
 deactivating="deactivating (stop)"
 
-MenuServicos()
+MenuServices()
 {
 clear
 echo -ne "How do you do?"
