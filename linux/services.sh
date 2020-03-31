@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Autor Waltenne Carvalho
+# https://github.com/waltenne/
+
 YELLOW='\033[1;33m'
 CYAN='\033[1;36m'
 WHITE='\033[1;15m'
