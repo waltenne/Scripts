@@ -1,4 +1,9 @@
-# Scripts
+![Languages](https://img.shields.io/badge/1-Python-blue.svg)
+
+![Languages](https://img.shields.io/badge/2-ShellScript-red.svg)
+
+
+# Scripts 
 
   - Script Sharing Repository
   
@@ -13,10 +18,6 @@
 ## Zabbix directory
 
   - Zabbix Script Sharing Repository
-  
-#### 2. Autoinstall directory
-
-  - Script to automate Server and Agent installation on CentOS Zabbix 4.0
 
 #### 3. API directory
 
